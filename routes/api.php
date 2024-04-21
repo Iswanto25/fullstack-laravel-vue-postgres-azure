@@ -3,10 +3,14 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PersonController;
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
-Route::get('/person', 'App\Http\Controllers\Api\PersonController@index');
-Route::post('/person', 'App\Http\Controllers\Api\PersonController@store');
+Route::get('/person', [PersonController::class, 'index']);
+Route::get('/person/{id}', [PersonController::class, 'show']);
+Route::post('/person', [PersonController::class, 'store']);
+Route::post('/person/{id}', [PersonController::class, 'update']);
+Route::delete('/person/{id}', [PersonController::class, 'destroy']);
